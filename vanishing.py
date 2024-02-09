@@ -99,3 +99,40 @@ def get_vanishing_points(image):
     return point
     cv2.circle(image, (int(point[0]), int(point[1])), 10, (0, 0, 255), -1)
     return image
+
+
+def try_multi_vanishing_lines(image):
+    image = image.copy()
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    canny_thresholds = [(50, 150), (100, 200), (150, 250)]
+    hough_params = [(50, 5, 5), (100, 10, 10), (150, 15, 15)]
+
+    fig, axes = plt.subplots(len(canny_thresholds),
+                             len(hough_params), figsize=(12, 9))
+
+    for i, canny_params in enumerate(canny_thresholds):
+        for j, hough_params_single in enumerate(hough_params):
+            canny = cv2.Canny(gray, canny_params[0], canny_params[1])
+
+            lines = cv2.HoughLinesP(
+                canny, rho=1,
+                theta=np.pi/180,
+                threshold=hough_params_single[0],
+                minLineLength=hough_params_single[1],
+                maxLineGap=hough_params_single[2]
+            )
+
+            image_copy = np.copy(image)
+
+            if lines is not None:
+                for line in lines:
+                    x1, y1, x2, y2 = line[0]
+                    cv2.line(image_copy, (x1, y1), (x2, y2), (0, 255, 0), 2)
+
+            axes[i, j].imshow(cv2.cvtColor(image_copy, cv2.COLOR_BGR2RGB))
+            axes[i, j].set_title(
+                f"Canny: {canny_params}, Hough: {hough_params_single}")
+            axes[i, j].axis('off')
+
+    plt.tight_layout()
+    plt.show()
