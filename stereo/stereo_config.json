@@ -1,0 +1,47 @@
+{
+	"satellite": {
+		"filename": "satellite.png",
+		"lOffset": -16,
+		"rOffset": -16
+	},
+	"corridor": {
+		"filename": "corridor.png",
+		"lOffset": -16,
+		"rOffset": -16
+	},
+	"passau": {
+		"filename": "passau.jpg",
+		"lOffset": 5,
+		"rOffset": 5
+	},
+	"building": {
+		"filename": "building.png",
+		"lOffset": -15,
+		"rOffset": -16
+	},
+	"parking": {
+		"filename": "parking.png",
+		"lOffset": -16,
+		"rOffset": -16
+	},
+	"moon": {
+		"filename": "moon.jpg"
+	},
+	"snow": {
+		"filename": "snow.jpg",
+		"lOffset": -14,
+		"rOffset": -14
+	},
+	"nebula": {
+		"filename": "nebula.jpg"
+	},
+	"pentagon": {
+		"filename": "pentagon.png",
+		"lOffset": -4,
+		"rOffset": -5,
+		"blockSize": 19
+	},
+	"bug": {
+		"filename": "bug.jpg"
+	}
+}
