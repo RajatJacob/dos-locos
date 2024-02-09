@@ -6,8 +6,8 @@ _(two crazies)_
 
 ## Team
 
-- P2023PTLP0044 - **Lokesh Arora** (@lokeshtlp)
-- P2023PTLP0036 - **Rajat Abraham Jacob** (@RajatJacob)
+- P2023PTLP0044 - **Lokesh Arora** ([@lokeshtlp](https://github.com/lokeshtlp))
+- P2023PTLP0036 - **Rajat Abraham Jacob** ([@RajatJacob](https://github.com/RajatJacob))
 
 ## Introduction
 This repository implements algorithms described in the paper "Single-View Metrology: Algorithms and Applications" by Antonio Criminisi. These algorithms aim to extract three-dimensional geometric information from a single, uncalibrated image of a scene.
