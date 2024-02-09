@@ -16,8 +16,6 @@ def read_image(conf: StereoImageConfig, should_show: bool = False):
     stereoR = full_stereo[:, (full_stereo.shape[1]//2)-conf.rOffset:]
     if should_show:
         show(full_stereo)
-        show(stereoL)
-        show(stereoR)
     return stereoL, stereoR
 
 
