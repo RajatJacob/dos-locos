@@ -12,6 +12,10 @@ torch = "^2.2.0"
 pillow = "^10.2.0"
 opencv-python = "^4.9.0.80"
 matplotlib = "^3.8.2"
+open3d = "^0.18.0"
+scikit-learn = "^1.4.0"
+addict = "^2.4.0"
+pandas = "^2.2.0"
 
 
 [build-system]

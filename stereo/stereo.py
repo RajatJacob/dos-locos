@@ -1,3 +1,5 @@
+import numpy as np
+import open3d as o3d
 import cv2
 import matplotlib.pyplot as plt
 from pathlib import Path
@@ -76,3 +78,29 @@ def display_image_difference(stereoL, stereoR):
     diff = cv2.absdiff(gstereoL, gstereoR)
     plt.imshow(diff, 'gray')
     plt.show()
+
+
+def display_point_cloud(stereoL, stereoR):
+    # Convert stereo images to grayscale
+    stereoL_gray = cv2.cvtColor(stereoL, cv2.COLOR_BGR2GRAY)
+    stereoR_gray = cv2.cvtColor(stereoR, cv2.COLOR_BGR2GRAY)
+
+    # Compute disparity map
+    stereo = cv2.StereoBM_create(numDisparities=16, blockSize=15)
+    disparity_map = stereo.compute(stereoL_gray, stereoR_gray)
+    normalized_disparity_map = cv2.normalize(
+        disparity_map, None,
+        alpha=0, beta=1000,
+        norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U
+    )
+
+    oimg = o3d.geometry.Image(cv2.cvtColor(
+        stereoL, cv2.COLOR_BGR2RGB).astype(np.uint8))
+    odepth = o3d.geometry.Image(normalized_disparity_map)
+
+    rgbd = o3d.geometry.RGBDImage.create_from_color_and_depth(
+        oimg, odepth, convert_rgb_to_intensity=False)
+    pcd = o3d.geometry.PointCloud.create_from_rgbd_image(rgbd, o3d.camera.PinholeCameraIntrinsic(
+        o3d.camera.PinholeCameraIntrinsicParameters.PrimeSenseDefault))
+    o3d.visualization.draw_geometries([pcd])
+    return pcd
